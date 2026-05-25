@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>文学少女维希莱妮 v.1.02</title>
+    <title>文学少女维希莱妮 · 全功能版</title>
     <style>
         :root {
             --bg-primary: #0d1117;
@@ -55,13 +55,7 @@
             z-index: 100;
             backdrop-filter: blur(12px);
         }
-        .header-brand {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-        }
+        .header-brand { font-size: 1rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
         .header-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
 
         .mode-tabs {
@@ -86,86 +80,27 @@
         .mode-tab:hover { color: var(--text-primary); background: var(--bg-primary); }
         .mode-tab.active { background: var(--accent); color: #fff; }
 
-        .main-container {
-            flex: 1;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 16px;
-            box-shadow: var(--shadow);
-        }
+        .main-container { flex: 1; max-width: 100%; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+        .card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow); }
         .card.collapsed .card-body { display: none; }
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 6px;
-            cursor: pointer;
-            user-select: none;
-        }
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; cursor: pointer; user-select: none; }
         .card-title { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
-        .collapse-btn {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            transition: transform 0.2s ease;
-        }
+        .collapse-btn { font-size: 1.1rem; color: var(--text-muted); transition: transform 0.2s ease; }
         .card:not(.collapsed) .collapse-btn { transform: rotate(90deg); }
 
         .form-group { margin-bottom: 10px; }
-        .form-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
+        .form-label { display: block; font-size: 0.75rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
         .form-input, .form-textarea, .form-select {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            transition: var(--transition);
-            resize: vertical;
-            max-width: 100%;
+            width: 100%; padding: 10px 12px; background: var(--bg-input); border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm); color: var(--text-primary); font-size: 0.85rem; transition: var(--transition); resize: vertical;
         }
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-light);
-        }
+        .form-input:focus, .form-textarea:focus, .form-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-light); }
         .form-textarea { min-height: 100px; font-family: var(--font-mono); font-size: 0.8rem; }
         .form-textarea.tall { min-height: 150px; }
 
         .btn {
-            padding: 7px 14px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            font-size: 0.8rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
+            padding: 7px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.8rem;
+            font-weight: 500; cursor: pointer; transition: var(--transition); white-space: nowrap; display: inline-flex; align-items: center; gap: 5px;
         }
         .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
         .btn-primary:hover { background: var(--accent-hover); }
@@ -176,586 +111,564 @@
         .btn-success { background: var(--success); color: #fff; border-color: var(--success); }
         .btn-sm { padding: 4px 8px; font-size: 0.7rem; }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .api-link {
-            color: var(--accent);
-            text-decoration: underline;
-            font-size: 0.75rem;
-            margin-left: 6px;
-            white-space: nowrap;
-        }
+        .api-link { color: var(--accent); text-decoration: underline; font-size: 0.75rem; margin-left: 6px; }
 
         .content-box {
-            position: relative;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 12px;
-            max-height: 300px;
-            overflow-y: auto;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            word-break: break-word;
-            margin-top: 8px;
+            background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px;
+            max-height: 300px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word; margin-top: 8px;
         }
-        .content-box br { margin: 0; line-height: inherit; }
-        .content-toolbar-external {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            margin-top: 8px;
-            flex-wrap: wrap;
-        }
-        .token-info {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            font-family: var(--font-mono);
-        }
+        .content-toolbar-external { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+        .token-info { font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono); }
 
-        .chapter-item {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 12px;
-            margin-bottom: 8px;
-        }
-        .chapter-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 6px; }
-        .chapter-number { font-weight: 700; color: var(--accent); font-size: 0.85rem; white-space: nowrap; }
-        .chapter-actions { display: flex; gap: 3px; }
+        .chapter-item { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px; margin-bottom: 12px; }
+        .chapter-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 6px; flex-wrap: wrap; }
+        .chapter-number { font-weight: 700; color: var(--accent); font-size: 0.85rem; }
+        .chapter-actions { display: flex; gap: 4px; flex-wrap: wrap; }
 
-        .character-card {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 10px;
-            margin-bottom: 6px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .character-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 8px 10px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: var(--transition); }
         .character-card:hover { border-color: var(--accent); }
         .character-card.selected { border-color: var(--accent); background: var(--accent-light); }
-        .character-card-header { flex: 1; display: flex; align-items: center; gap: 8px; }
-        .character-name { font-weight: 600; font-size: 0.85rem; }
-        .character-checkbox { accent-color: var(--accent); }
-        .chat-area {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 12px;
-            max-height: 300px;
-            overflow-y: auto;
-            margin-top: 8px;
-        }
-        .chat-msg { margin-bottom: 6px; line-height: 1.6; }
+        .character-checkbox { accent-color: var(--accent); margin-right: 4px; }
+        .character-name { font-weight: 600; font-size: 0.85rem; flex: 1; }
+        .chat-area { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px; max-height: 300px; overflow-y: auto; margin-top: 8px; }
+        .chat-msg { margin-bottom: 8px; line-height: 1.6; }
         .chat-speaker { font-weight: 700; color: var(--accent); }
         .chat-input-row { display: flex; gap: 6px; margin-top: 8px; }
         .chat-input-row .form-input { flex: 1; }
 
-        .preview-section {
-            background: #ffffff;
-            border: 1px solid #d0d7de;
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            color: #1f2328;
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            line-height: 1.7;
-            max-height: 400px;
-            overflow-y: auto;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-        }
-        .preview-label {
-            font-size: 0.7rem;
-            color: #656d76;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 10px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid #d0d7de;
-        }
+        .preview-section { background: #ffffff; border: 1px solid #d0d7de; border-radius: var(--radius-lg); padding: 24px; color: #1f2328; font-size: 0.9rem; line-height: 1.7; max-height: 400px; overflow-y: auto; }
+        .preview-label { font-size: 0.7rem; color: #656d76; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; border-bottom: 1px solid #d0d7de; padding-bottom: 6px; }
 
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        .modal {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            max-width: 90%;
-            width: 400px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        }
-        .modal h3 { margin-bottom: 12px; color: var(--accent); font-size: 1rem; }
+        .modal-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .modal { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; max-width: 90%; width: 400px; }
 
         .chat-fullscreen {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--bg-primary);
-            z-index: 200;
-            display: flex;
-            flex-direction: column;
+            position: fixed; top:0; left:0; right:0; bottom:0; background: var(--bg-primary); z-index: 200;
+            display: flex; flex-direction: column;
         }
-        .chat-fullscreen-header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            height: 56px;
-            flex-shrink: 0;
-        }
-        .chat-fullscreen-header .back-btn {
-            background: transparent;
-            border: none;
-            color: var(--accent);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .chat-fullscreen-header .title {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-primary);
-        }
-        .chat-fullscreen-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .chat-fullscreen-footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 10px 16px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-shrink: 0;
-            transition: transform 0.1s ease-out;
-        }
-        .chat-fullscreen-footer .form-input {
-            flex: 1;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 10px 16px;
-            font-size: 0.9rem;
-        }
-        .chat-fullscreen-footer .send-btn {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
+        .chat-fullscreen-header { background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 12px 16px; display: flex; align-items: center; gap: 12px; height: 56px; flex-shrink: 0; }
+        .chat-fullscreen-header .back-btn { background: transparent; border: none; color: var(--accent); font-size: 1.2rem; cursor: pointer; }
+        .chat-fullscreen-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .chat-fullscreen-footer { background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 10px 16px; display: flex; gap: 8px; align-items: center; flex-shrink: 0; transition: transform 0.1s ease; }
+        .chat-fullscreen-footer .form-input { flex: 1; border-radius: 20px; padding: 10px 16px; }
+        .chat-fullscreen-footer .send-btn { background: var(--accent); color: #fff; border: none; border-radius: 20px; padding: 10px 20px; cursor: pointer; }
 
-        .doc-list-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 0;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.75rem;
-        }
-        .doc-list-item:last-child { border-bottom: none; }
-
-        .footer-note {
-            text-align: center;
-            padding: 20px 16px;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
+        .doc-list-item { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-color); font-size: 0.75rem; }
+        .footer-note { text-align: center; padding: 20px 16px; font-size: 0.7rem; color: var(--text-muted); }
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-        @media (max-width: 768px) {
-            .header { padding: 10px 12px; }
-            .main-container { padding: 10px; }
-            .mode-tabs { width: 100%; overflow-x: auto; }
-            .card { padding: 12px; }
-            .btn { padding: 6px 10px; font-size: 0.75rem; }
-        }
     </style>
 </head>
 <body>
-
-    <header class="header">
-        <span class="header-brand" id="headerTitle">🧰 文学少女维希莱妮 v.1.02</span>
-        <div class="header-actions">
-            <div class="mode-tabs" id="modeTabs">
-                <button class="mode-tab active" data-mode="longtext">📝 长文本</button>
-                <button class="mode-tab" data-mode="novel">📖 小说</button>
-                <button class="mode-tab" data-mode="chat">💬 对话</button>
-            </div>
-            <button class="btn btn-secondary btn-sm" onclick="openSaveProfileModal()">💾 保存</button>
-            <button class="btn btn-secondary btn-sm" onclick="openLoadProfileModal()">📂 方案</button>
+<header class="header">
+    <span class="header-brand">📖 文学少女维希莱妮 · 稳定版</span>
+    <div class="header-actions">
+        <div class="mode-tabs" id="modeTabs">
+            <button class="mode-tab active" data-mode="longtext">📝 长文本</button>
+            <button class="mode-tab" data-mode="novel">📖 小说</button>
+            <button class="mode-tab" data-mode="chat">💬 对话</button>
         </div>
-    </header>
-
-    <div class="main-container" id="mainContainer"></div>
-    <div class="footer-note">
-        内容由AI生产，请仔细甄别<br>如有问题请联系475411492@qq.com
+        <button class="btn btn-secondary btn-sm" id="saveProfileBtn">💾 保存方案</button>
+        <button class="btn btn-secondary btn-sm" id="loadProfileBtn">📂 加载方案</button>
     </div>
-    <div id="modalContainer"></div>
-    <div id="chatFullscreenContainer"></div>
+</header>
+<div class="main-container" id="mainContainer"></div>
+<div class="footer-note">内容由AI生成，请仔细甄别 | 支持DeepSeek API</div>
+<div id="modalContainer"></div>
+<div id="chatFullscreenContainer"></div>
 
-    <script>
-        (function() {
-            const STORAGE_KEY = 'deepseek_tool_state_v11';
-            const PROFILES_KEY = 'deepseek_tool_profiles_v11';
+<script>
+    (function(){
+        // ---------- 状态 ----------
+        const STORAGE_KEY = 'literary_girl_v2';
+        const PROFILES_KEY = 'literary_profiles_v2';
+        let state = {
+            currentMode: 'longtext',
+            apiKey: '',
+            currentModel: 'deepseek-v4-pro',
+            maxTokens: 256000,
+            systemPromptLongtext: '',
+            systemPromptNovel: '',
+            systemPromptChat: '',
+            longtextUserPrompt: '',
+            longtextResult: '',
+            novelTitle: '未命名小说',
+            novelChapters: [],
+            chatCharacters: [],
+            chatSelectedIndices: [],
+            chatHistory: [],
+            chatContextCount: 6,
+            chatUserInput: '',
+            importedDocs: [],
+            collapsedCards: { api: false, mode: false, preview: false },
+            chatFullscreen: false
+        };
 
-            const state = {
-                currentMode: 'longtext',
-                currentModel: 'deepseek-v4-pro',
-                maxTokens: 256000,
-                apiKey: '',
-                systemPromptLongtext: '',
-                systemPromptNovel: '',
-                systemPromptChat: '',
-                longtextUserPrompt: '',
-                longtextResult: '',
-                novelTitle: '',
-                novelChapters: [],
-                chatCharacters: [],
-                chatSelectedCharacterIndices: [],
-                chatHistory: [],
-                chatContextCount: 5,
-                chatUserInput: '',
-                collapsedCards: { api: false, mode: false, preview: false },
-                importedDocs: [],
-                chatFullscreen: false
-            };
-            // 固定用户名为“我”，不再存储到state中
-
-            function getCurrentSystemPrompt() {
-                switch (state.currentMode) {
-                    case 'longtext': return state.systemPromptLongtext;
-                    case 'novel': return state.systemPromptNovel;
-                    case 'chat': return state.systemPromptChat;
-                    default: return '';
-                }
-            }
-            function setCurrentSystemPrompt(value) {
-                switch (state.currentMode) {
-                    case 'longtext': state.systemPromptLongtext = value; break;
-                    case 'novel': state.systemPromptNovel = value; break;
-                    case 'chat': state.systemPromptChat = value; break;
-                }
-            }
-
-            function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-            function loadState() {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (!raw) return;
+        // 辅助函数
+        function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+        function loadStoredState() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if(raw) {
                 try {
                     const saved = JSON.parse(raw);
-                    Object.keys(saved).forEach(key => { if (key in state && key !== 'chatUserName') state[key] = saved[key]; });
-                    if (saved.chatHistory) saved.chatHistory.forEach(m => { if (!m.role) m.role = (m.speaker === '我') ? 'user' : 'assistant'; });
-                    if (!state.currentModel) state.currentModel = 'deepseek-v4-pro';
-                    if (!state.maxTokens) state.maxTokens = 256000;
-                    if (!state.collapsedCards) state.collapsedCards = { api: false, mode: false, preview: false };
-                    if (!state.importedDocs) state.importedDocs = [];
-                    if (!state.chatSelectedCharacterIndices) state.chatSelectedCharacterIndices = [];
-                    if (state.chatFullscreen === undefined) state.chatFullscreen = false;
-                    state.novelChapters.forEach(ch => { if (!ch.content) ch.content = ''; });
-                    if (state.chatCharacters) state.chatCharacters.forEach(c => {
-                        if (!c.description && (c.identity || c.personality || c.speechStyle)) c.description = [c.identity, c.personality, c.speechStyle].filter(Boolean).join('\n');
-                    });
-                    // 确保所有历史用户消息的speaker为“我”
-                    state.chatHistory.forEach(m => { if (m.role === 'user') m.speaker = '我'; });
-                } catch (e) { console.warn('状态加载失败'); }
+                    Object.assign(state, saved);
+                    if(!state.novelChapters) state.novelChapters = [];
+                    if(!state.chatCharacters) state.chatCharacters = [];
+                    if(!state.chatHistory) state.chatHistory = [];
+                    if(!state.importedDocs) state.importedDocs = [];
+                    if(!state.chatSelectedIndices) state.chatSelectedIndices = [];
+                    state.novelChapters.forEach(ch => { if(!ch.content) ch.content=''; if(!ch.summary) ch.summary=''; });
+                    state.chatHistory.forEach(m => { if(m.role === 'user') m.speaker = '我'; });
+                } catch(e) {}
             }
-
-            function saveProfiles(profiles) { localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles)); }
-            function loadProfiles() { return JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]'); }
-
-            function estimateTokens(text) {
-                if (!text) return 0;
-                const cjk = (text.match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af]/g) || []).length * 2;
-                const nonCjk = text.replace(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af]/g, ' ');
-                const words = nonCjk.trim().split(/\s+/).filter(w => w.length > 0).length;
-                return Math.max(1, cjk + Math.round(words * 1.33));
-            }
-
-            function copyText(text) {
-                if (!text) return;
-                if (navigator.clipboard && window.isSecureContext) {
-                    navigator.clipboard.writeText(text).then(() => alert('已复制')).catch(() => fallbackCopy(text));
-                } else fallbackCopy(text);
-            }
-            function fallbackCopy(text) {
-                const ta = document.createElement('textarea');
-                ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
-                document.body.appendChild(ta); ta.select();
-                try { document.execCommand('copy'); alert('已复制'); } catch (e) { alert('复制失败'); }
-                document.body.removeChild(ta);
-            }
-
-            function formatText(text) { return escapeHtml(text).replace(/\n+/g, '<br>'); }
-            function escapeHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-            function scrollToBottom(el) { if (el) setTimeout(() => { el.scrollTop = el.scrollHeight; }, 10); }
-
-            function setupKeyboardHandler() {
-                const visualViewport = window.visualViewport;
-                if (!visualViewport) return;
-                const handler = () => {
-                    const footer = document.querySelector('.chat-fullscreen-footer');
-                    if (footer) {
-                        const offset = window.innerHeight - visualViewport.height - visualViewport.offsetTop;
-                        footer.style.transform = `translateY(-${Math.max(0, offset)}px)`;
-                    }
-                };
-                visualViewport.addEventListener('resize', handler);
-                visualViewport.addEventListener('scroll', handler);
-            }
-
-            function renderAll() {
-                document.getElementById('headerTitle').textContent = '🧰 文学少女维希莱妮 v.1.02';
-
-                if (state.currentMode === 'chat' && state.chatFullscreen) {
-                    renderChatFullscreen();
-                    document.getElementById('mainContainer').innerHTML = '';
-                    document.getElementById('chatFullscreenContainer').style.display = 'block';
-                    setupKeyboardHandler();
-                    return;
-                }
-                document.getElementById('chatFullscreenContainer').style.display = 'none';
-
-                const container = document.getElementById('mainContainer');
-                const previewCard = (state.currentMode !== 'chat') ? renderPreviewCard() : '';
-                container.innerHTML = renderSettingsCard() + renderModeCard() + previewCard;
-                bindEvents();
-                document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === state.currentMode));
-                applyCollapseState();
-                setupKeyboardHandler();
-            }
-
-            function applyCollapseState() {
-                document.getElementById('apiSettingsCard')?.classList.toggle('collapsed', state.collapsedCards.api);
-                document.getElementById('modeCard')?.classList.toggle('collapsed', state.collapsedCards.mode);
-                const previewCard = document.getElementById('previewCard');
-                if (previewCard) previewCard.classList.toggle('collapsed', state.collapsedCards.preview);
-            }
-
-            function renderSettingsCard() {
-                const sysPrompt = getCurrentSystemPrompt();
-                let docsHtml = state.importedDocs.length
-                    ? state.importedDocs.map((d,i) => `<div class="doc-list-item"><span>📄 ${escapeHtml(d.name)} (${d.content.length}字)</span><button class="btn btn-sm btn-danger delete-doc-btn" data-index="${i}">✕</button></div>`).join('')
-                    : '<div style="font-size:0.75rem; color:var(--text-muted);">暂无文档</div>';
-                return `
-                <div class="card" id="apiSettingsCard">
-                    <div class="card-header" id="apiCardHeader"><span class="card-title">🔑 API 与模型</span><span class="collapse-btn">▶</span></div>
-                    <div class="card-body">
-                        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                            <div class="form-group" style="flex:1; min-width:180px;">
-                                <label class="form-label">API Key <a href="https://platform.deepseek.com/api_keys" target="_blank" class="api-link">🔗 获取</a></label>
-                                <input type="password" class="form-input" id="apiKeyInput" value="${escapeHtml(state.apiKey)}" placeholder="sk-...">
-                            </div>
-                            <div class="form-group" style="flex:1; min-width:150px;">
-                                <label class="form-label">模型</label>
-                                <select class="form-select" id="modelSelect">
-                                    <option value="deepseek-v4-pro" ${state.currentModel==='deepseek-v4-pro'?'selected':''}>V4-Pro</option>
-                                    <option value="deepseek-v4-flash" ${state.currentModel==='deepseek-v4-flash'?'selected':''}>V4-Flash</option>
-                                    <option value="claude-code" ${state.currentModel==='claude-code'?'selected':''}>Claude Code</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="flex:1; min-width:130px;">
-                                <label class="form-label">最大Token</label>
-                                <input type="number" class="form-input" id="maxTokensInput" value="${state.maxTokens}" min="1000" max="256000" step="1000">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">系统提示词 (${state.currentMode==='longtext'?'长文本':state.currentMode==='novel'?'小说':'对话'})</label>
-                            <textarea class="form-textarea" id="systemPromptInput">${escapeHtml(sysPrompt)}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">📚 导入语料 (TXT/Word)</label>
-                            <div style="display:flex; gap:8px; align-items:center;">
-                                <input type="file" id="docFileInput" accept=".txt,.docx" style="display:none;">
-                                <button class="btn btn-secondary btn-sm" id="btnImportDoc">📂 选择文件</button>
-                                <span style="font-size:0.7rem; color:var(--text-muted);">单文档≤50万字，总计≤100万字</span>
-                            </div>
-                            <div style="margin-top:6px; background:var(--bg-tertiary); border-radius:var(--radius-sm); padding:6px;" id="importedDocsList">${docsHtml}</div>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            function renderModeCard() {
-                let content = '';
-                switch (state.currentMode) {
-                    case 'longtext': content = renderLongtextCard(); break;
-                    case 'novel': content = renderNovelCard(); break;
-                    case 'chat': content = renderChatCard(); break;
-                }
-                return `<div class="card" id="modeCard"><div class="card-header" id="modeCardHeader"><span class="card-title">${state.currentMode==='longtext'?'📝 单次长文本':state.currentMode==='novel'?'📖 小说创作':'💬 对话模式'}</span><span class="collapse-btn">▶</span></div><div class="card-body">${content}</div></div>`;
-            }
-
-            function renderLongtextCard() { 
-                return `<div><div class="form-group"><label class="form-label">提示词</label><textarea class="form-textarea tall" id="longtextPromptInput">${escapeHtml(state.longtextUserPrompt)}</textarea></div><button class="btn btn-primary" id="btnLongtextGenerate" style="margin-bottom:10px;">🚀 生成</button><div class="content-toolbar-external"><span class="token-info" id="longtextTokenInfo">字数:${state.longtextResult.length} Token:${estimateTokens(state.longtextResult)}</span><div><button class="btn btn-sm btn-secondary" id="btnLongtextClear">🗑</button><button class="btn btn-sm btn-secondary" id="btnLongtextRegen">🔄</button><button class="btn btn-sm btn-secondary" id="btnLongtextCopy">📋</button></div></div><div class="content-box" id="longtextContentBox"><div id="longtextContent">${state.longtextResult ? formatText(state.longtextResult) : '<span style="color:var(--text-muted)">等待生成...</span>'}</div></div></div>`;
-            }
-            function renderNovelCard() { 
-                let chaptersHtml = state.novelChapters.map((ch, i) => `<div class="chapter-item" data-chapter-index="${i}"><div class="chapter-header"><span class="chapter-number">第${i+1}章</span><div class="chapter-actions"><button class="btn btn-sm btn-primary chapter-generate" data-index="${i}">⚡</button><button class="btn btn-sm btn-secondary chapter-copy" data-index="${i}">📋</button><button class="btn btn-sm btn-secondary chapter-clear" data-index="${i}">🗑</button><button class="btn btn-sm btn-secondary chapter-regen" data-index="${i}">🔄</button><button class="btn btn-sm btn-danger chapter-delete" data-index="${i}">✕</button></div></div><div class="form-group"><label class="form-label">梗概</label><textarea class="form-textarea chapter-summary" data-index="${i}" rows="2">${escapeHtml(ch.summary)}</textarea></div><div class="content-toolbar-external"><span class="token-info chapter-token-info" data-index="${i}">字数:${ch.content.length} Token:${estimateTokens(ch.content)}</span></div><div class="content-box" style="max-height:200px;" id="chapterContentBox${i}"><div class="chapter-content-display" data-index="${i}">${ch.content ? formatText(ch.content) : '<span style="color:var(--text-muted)">未生成</span>'}</div></div></div>`).join('');
-                return `<div><div class="form-group"><label class="form-label">标题</label><input type="text" class="form-input" id="novelTitleInput" value="${escapeHtml(state.novelTitle)}" placeholder="小说标题"></div><div id="chaptersContainer">${chaptersHtml}</div><div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;"><button class="btn btn-primary btn-sm" id="btnAddChapter">➕ 章节</button><button class="btn btn-secondary btn-sm" id="btnGenerateAll">⚡ 全部生成</button><button class="btn btn-success btn-sm" id="btnConcatAll">📋 拼接复制（预览内容）</button><button class="btn btn-danger btn-sm" id="btnClearAllChapters">🗑 清除</button></div>${state.novelChapters.length<3?'<p style="color:var(--warning);font-size:0.7rem;margin-top:6px;">⚠️ 建议≥3章</p>':''}</div>`;
-            }
-            function renderChatCard() {
-                let charsHtml = state.chatCharacters.map((ch,i) => `<div class="character-card ${state.chatSelectedCharacterIndices.includes(i)?'selected':''}" data-char-index="${i}"><input type="checkbox" class="character-checkbox" data-index="${i}" ${state.chatSelectedCharacterIndices.includes(i)?'checked':''}><div class="character-card-header"><span class="character-name">${escapeHtml(ch.name||'未命名')}</span><div><button class="btn btn-sm btn-secondary edit-char" data-index="${i}">✎</button><button class="btn btn-sm btn-danger delete-char" data-index="${i}">✕</button></div></div></div>`).join('');
-                let historyHtml = state.chatHistory.map(m => `<div class="chat-msg"><span class="chat-speaker" style="color:${m.role==='user'?'var(--text-secondary)':'var(--accent)'}">${escapeHtml(m.speaker)}：</span>${formatText(m.text)}</div>`).join('') || '<span style="color:var(--text-muted)">开始对话...</span>';
-                // 移除用户名输入框，固定为“我”
-                return `<div><div class="form-group"><label class="form-label">角色 (最多5个，可多选)</label><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;">${charsHtml}</div><button class="btn btn-sm btn-primary" id="btnAddCharacter">➕ 新增</button><button class="btn btn-sm btn-secondary" id="btnRenameCharacter">✎ 重命名选中</button><button class="btn btn-sm btn-secondary" id="btnFullscreenChat">📱 全屏聊天</button></div><div class="form-group"><label class="form-label">上下文轮数</label><input type="number" class="form-input" id="chatContextCount" value="${state.chatContextCount}" min="1" max="50" style="width:100px;"></div><div class="content-toolbar-external"><span class="token-info" id="chatTokenInfo">字数:${state.chatHistory.reduce((s,m)=>s+m.text.length,0)} Token:${estimateTokens(state.chatHistory.map(m=>m.text).join(' '))}</span><div><button class="btn btn-sm btn-secondary" id="btnChatClear">🗑</button><button class="btn btn-sm btn-secondary" id="btnChatCopy">📋</button></div></div><div class="chat-area" id="chatHistoryBox">${historyHtml}</div><div class="chat-input-row"><input type="text" class="form-input" id="chatUserInput" value="${escapeHtml(state.chatUserInput)}" placeholder="输入消息..."><button class="btn btn-primary btn-sm" id="btnChatSend">发送</button></div></div>`;
-            }
-            function renderPreviewCard() { 
-                if (state.currentMode === 'chat') return '';
-                let content = state.currentMode === 'longtext' ? (state.longtextResult ? formatText(state.longtextResult) : '<p style="color:#999;">暂无</p>') : state.novelChapters.map((ch,i)=>`<h3>第${i+1}章</h3><p>${formatText(ch.content||'（未生成）')}</p>`).join('') || '<p style="color:#999;">暂无</p>';
-                return `<div class="card" id="previewCard"><div class="card-header" id="previewCardHeader"><span class="card-title">📄 预览</span><span class="collapse-btn">▶</span></div><div class="card-body"><div class="preview-section"><div class="preview-label">${state.currentMode==='novel'?state.novelTitle||'小说':'长文本'}</div><div id="previewContent">${content}</div></div></div></div>`;
-            }
-
-            function renderChatFullscreen() { 
-                const selectedChars = state.chatSelectedCharacterIndices.map(i => state.chatCharacters[i]).filter(Boolean);
-                const title = selectedChars.length ? selectedChars.map(c => c.name).join('、') : '未选择角色';
-                let messagesHtml = state.chatHistory.map(m => `<div class="chat-msg" style="text-align:${m.role==='user'?'right':'left'};"><span style="color:${m.role==='user'?'var(--text-secondary)':'var(--accent)'}; font-weight:600;">${escapeHtml(m.speaker)}</span><div style="background:${m.role==='user'?'var(--bg-tertiary)':'var(--accent-light)'}; display:inline-block; padding:8px 12px; border-radius:12px; max-width:80%; margin-top:4px; text-align:left;">${formatText(m.text)}</div></div>`).join('');
-                const container = document.getElementById('chatFullscreenContainer');
-                container.innerHTML = `<div class="chat-fullscreen"><div class="chat-fullscreen-header"><button class="back-btn" id="btnCloseFullscreen">←</button><span class="title">${escapeHtml(title)}</span></div><div class="chat-fullscreen-body" id="fullscreenChatBody">${messagesHtml || '<div style="color:var(--text-muted); text-align:center; margin-top:40%;">开始对话吧</div>'}</div><div class="chat-fullscreen-footer"><input type="text" class="form-input" id="fullscreenChatInput" value="${escapeHtml(state.chatUserInput)}" placeholder="输入消息..."><button class="send-btn" id="btnFullscreenSend">发送</button></div></div>`;
-                bindFullscreenEvents();
-                const body = document.getElementById('fullscreenChatBody');
-                scrollToBottom(body);
-                const input = document.getElementById('fullscreenChatInput');
-                if(input && !state.chatHistory.length) input.focus();
-            }
-
-            function bindFullscreenEvents() {
-                document.getElementById('btnCloseFullscreen')?.addEventListener('click', () => { state.chatFullscreen = false; renderAll(); });
-                document.getElementById('btnFullscreenSend')?.addEventListener('click', () => { const input = document.getElementById('fullscreenChatInput'); const text = input.value.trim(); if (!text) return; state.chatUserInput = ''; input.value = ''; sendChatMessageFromFullscreen(text); });
-                document.getElementById('fullscreenChatInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('btnFullscreenSend').click(); });
-                document.getElementById('fullscreenChatInput')?.addEventListener('input', e => { state.chatUserInput = e.target.value; });
-            }
-
-            async function sendChatMessageFromFullscreen(text) {
-                if (state.chatSelectedCharacterIndices.length === 0) return alert('请先选择角色');
-                state.chatHistory.push({ speaker: '我', text, role: 'user' });
-                state.chatUserInput = '';
-                saveState();
-                await performSendChat();
-                renderChatFullscreen();
-            }
-
-            function bindEvents() {
-                document.querySelectorAll('.mode-tab').forEach(tab => { tab.addEventListener('click', function() { const newMode = this.dataset.mode; if (state.currentMode === newMode) return; const sysInput = document.getElementById('systemPromptInput'); if (sysInput) setCurrentSystemPrompt(sysInput.value); state.currentMode = newMode; state.chatFullscreen = false; saveState(); renderAll(); }); });
-                document.getElementById('apiCardHeader')?.addEventListener('click', () => { state.collapsedCards.api = !state.collapsedCards.api; saveState(); applyCollapseState(); });
-                document.getElementById('modeCardHeader')?.addEventListener('click', () => { state.collapsedCards.mode = !state.collapsedCards.mode; saveState(); applyCollapseState(); });
-                document.getElementById('previewCardHeader')?.addEventListener('click', () => { state.collapsedCards.preview = !state.collapsedCards.preview; saveState(); applyCollapseState(); });
-                document.getElementById('apiKeyInput')?.addEventListener('input', e => { state.apiKey = e.target.value; saveState(); });
-                document.getElementById('modelSelect')?.addEventListener('change', e => { state.currentModel = e.target.value; saveState(); });
-                document.getElementById('maxTokensInput')?.addEventListener('change', e => { let v = parseInt(e.target.value); if (isNaN(v)) v = 256000; state.maxTokens = Math.min(256000, Math.max(1000, v)); e.target.value = state.maxTokens; saveState(); });
-                document.getElementById('systemPromptInput')?.addEventListener('input', e => { setCurrentSystemPrompt(e.target.value); saveState(); });
-                document.getElementById('btnImportDoc')?.addEventListener('click', () => document.getElementById('docFileInput').click());
-                document.getElementById('docFileInput')?.addEventListener('change', handleFileImport);
-                if (state.currentMode === 'longtext') bindLongtextEvents();
-                else if (state.currentMode === 'novel') bindNovelEvents();
-                else if (state.currentMode === 'chat') bindChatEvents();
-// 绑定语料删除按钮事件
-document.querySelectorAll('.delete-doc-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const idx = parseInt(btn.dataset.index);
-        if (!isNaN(idx)) {
-            state.importedDocs.splice(idx, 1);
-            saveState();
-            renderAll();
+            if(state.novelChapters.length === 0) state.novelChapters = [{summary:'开篇', content:''},{summary:'发展', content:''},{summary:'高潮', content:''}];
         }
-    });
-});
+        function estimateTokens(text) { if(!text) return 0; const cjk = (text.match(/[\u4e00-\u9fff]/g)||[]).length*2; const words = text.replace(/[\u4e00-\u9fff]/g,' ').trim().split(/\s+/).filter(w=>w).length; return cjk + Math.round(words*1.3); }
+        function escapeHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+        function formatText(t) { return escapeHtml(t).replace(/\n/g,'<br>'); }
+        function copyText(t) { if(!t) return; navigator.clipboard?.writeText(t).then(()=>alert('已复制')).catch(()=>alert('复制失败')); }
+        function scrollToBottom(el) { if(el) setTimeout(()=> el.scrollTop = el.scrollHeight, 30); }
+
+        // 获取当前系统提示
+        function getCurSysPrompt() {
+            if(state.currentMode === 'longtext') return state.systemPromptLongtext;
+            if(state.currentMode === 'novel') return state.systemPromptNovel;
+            return state.systemPromptChat;
+        }
+        function setCurSysPrompt(v) {
+            if(state.currentMode === 'longtext') state.systemPromptLongtext = v;
+            else if(state.currentMode === 'novel') state.systemPromptNovel = v;
+            else state.systemPromptChat = v;
+        }
+
+        // ---------- API调用 (统一) ----------
+        async function callAPI(messages, { stream = false } = {}) {
+            if(!state.apiKey) throw new Error('请填写API Key');
+            // 附加语料
+            if(state.importedDocs.length) {
+                const docText = state.importedDocs.map(d=>d.content).join('\n\n').slice(0, 30000);
+                messages = messages.map(m => {
+                    if(m.role === 'system') return { ...m, content: `${m.content}\n\n【参考语料】\n${docText}` };
+                    return m;
+                });
             }
-            function bindLongtextEvents() { 
-                document.getElementById('longtextPromptInput')?.addEventListener('input', e => { state.longtextUserPrompt = e.target.value; });
-                document.getElementById('btnLongtextGenerate')?.addEventListener('click', generateLongtext);
-                document.getElementById('btnLongtextClear')?.addEventListener('click', () => { state.longtextResult = ''; saveState(); renderAll(); });
-                document.getElementById('btnLongtextRegen')?.addEventListener('click', generateLongtext);
-                document.getElementById('btnLongtextCopy')?.addEventListener('click', () => copyText(state.longtextResult));
+            const isAnthropic = state.currentModel === 'claude-code';
+            const url = isAnthropic ? 'https://api.deepseek.com/anthropic/v1/messages' : 'https://api.deepseek.com/v1/chat/completions';
+            const headers = isAnthropic ? { 'Content-Type':'application/json', 'x-api-key': state.apiKey } : { 'Content-Type':'application/json', 'Authorization': `Bearer ${state.apiKey}` };
+            let body;
+            if(isAnthropic) {
+                const sysMsg = messages.find(m=>m.role==='system');
+                const userMsgs = messages.filter(m=>m.role!=='system').map(m=>({ role: m.role, content: [{type:'text', text:m.content}] }));
+                body = { model: 'deepseek-v4-pro', max_tokens: state.maxTokens, stream, messages: userMsgs };
+                if(sysMsg) body.system = sysMsg.content;
+            } else {
+                const modelId = state.currentModel === 'deepseek-v4-flash' ? 'deepseek-v4-flash' : 'deepseek-v4-pro';
+                body = { model: modelId, messages, max_tokens: state.maxTokens, stream, temperature: 0.8 };
             }
-            function bindNovelEvents() { 
-                document.getElementById('novelTitleInput')?.addEventListener('input', e => { state.novelTitle = e.target.value; saveState(); });
-                document.getElementById('btnAddChapter')?.addEventListener('click', () => { state.novelChapters.push({summary:'',content:''}); saveState(); renderAll(); });
-                document.getElementById('btnGenerateAll')?.addEventListener('click', generateAllChapters);
-                document.getElementById('btnConcatAll')?.addEventListener('click', () => { const previewEl = document.getElementById('previewContent'); if(!previewEl) return; const text = previewEl.innerText; if(text.trim()) copyText(text); else alert('预览内容为空'); });
-                document.getElementById('btnClearAllChapters')?.addEventListener('click', () => { if(confirm('清除全部？')) { state.novelChapters.forEach(ch=>ch.content=''); saveState(); renderAll(); } });
+            const resp = await fetch(url, { method:'POST', headers, body: JSON.stringify(body) });
+            if(!resp.ok) throw new Error(`API错误 ${resp.status}`);
+            return resp;
+        }
+
+        async function readStream(resp, isAnthropic, onChunk) {
+            const reader = resp.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            while(true) {
+                const { done, value } = await reader.read();
+                if(done) break;
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop();
+                for(let line of lines) {
+                    const trimmed = line.trim();
+                    if(!trimmed || trimmed === 'data: [DONE]') continue;
+                    if(trimmed.startsWith('data: ')) {
+                        try {
+                            const json = JSON.parse(trimmed.slice(6));
+                            let text = '';
+                            if(isAnthropic) { if(json.type === 'content_block_delta' && json.delta?.text) text = json.delta.text; }
+                            else { if(json.choices?.[0]?.delta?.content) text = json.choices[0].delta.content; }
+                            if(text) onChunk(text);
+                        } catch(e) {}
+                    }
+                }
             }
-            function bindChatEvents() {
-                document.querySelectorAll('.character-checkbox').forEach(cb => cb.addEventListener('change', function(e) { const idx = parseInt(this.dataset.index); if(this.checked) { if(!state.chatSelectedCharacterIndices.includes(idx)) state.chatSelectedCharacterIndices.push(idx); } else state.chatSelectedCharacterIndices = state.chatSelectedCharacterIndices.filter(i => i !== idx); saveState(); renderAll(); }));
-                document.getElementById('btnAddCharacter')?.addEventListener('click', () => { if(state.chatCharacters.length >= 5) return alert('最多5个'); openCharacterEditor(-1); });
-                document.getElementById('btnRenameCharacter')?.addEventListener('click', () => { if(state.chatSelectedCharacterIndices.length === 0) return alert('请先选择角色'); openCharacterEditor(state.chatSelectedCharacterIndices[0]); });
-                document.getElementById('btnFullscreenChat')?.addEventListener('click', () => { if(state.chatSelectedCharacterIndices.length === 0) return alert('请先选择角色'); state.chatFullscreen = true; renderAll(); });
-                document.querySelectorAll('.edit-char').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); openCharacterEditor(parseInt(e.target.dataset.index)); }));
-                document.querySelectorAll('.delete-char').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); const idx = parseInt(e.target.dataset.index); state.chatCharacters.splice(idx,1); state.chatSelectedCharacterIndices = state.chatSelectedCharacterIndices.filter(i => i !== idx).map(i => i > idx ? i-1 : i); saveState(); renderAll(); }));
-                document.getElementById('chatContextCount')?.addEventListener('change', e => { state.chatContextCount = parseInt(e.target.value)||5; saveState(); });
-                document.getElementById('btnChatSend')?.addEventListener('click', () => { const input = document.getElementById('chatUserInput'); const text = input.value.trim(); if (!text) return; state.chatUserInput = ''; input.value = ''; sendChatMessageFromMain(text); });
-                document.getElementById('chatUserInput')?.addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('btnChatSend').click(); });
-                document.getElementById('chatUserInput')?.addEventListener('input', e => { state.chatUserInput = e.target.value; });
-                document.getElementById('btnChatClear')?.addEventListener('click', () => { state.chatHistory = []; saveState(); renderAll(); });
-                document.getElementById('btnChatCopy')?.addEventListener('click', () => copyText(state.chatHistory.map(m=>`${m.speaker}：${m.text}`).join('\n')));
-            }
-            async function sendChatMessageFromMain(text) {
-                if (state.chatSelectedCharacterIndices.length === 0) return alert('请先选择角色');
-                state.chatHistory.push({ speaker: '我', text, role: 'user' });
-                state.chatUserInput = '';
+        }
+
+        // ---------- 长文本生成 ----------
+        async function generateLongtext() {
+            if(!state.apiKey) return alert('请填写API Key');
+            const btn = document.getElementById('genLongBtn');
+            if(btn) btn.disabled = true;
+            state.longtextResult = '';
+            saveState();
+            updateLongtextUI();
+            try {
+                const messages = [];
+                if(state.systemPromptLongtext) messages.push({ role:'system', content: state.systemPromptLongtext });
+                messages.push({ role:'user', content: state.longtextUserPrompt || '请生成一篇长文本' });
+                const resp = await callAPI(messages, { stream: true });
+                let full = '';
+                await readStream(resp, state.currentModel === 'claude-code', chunk => {
+                    full += chunk;
+                    state.longtextResult = full;
+                    updateLongtextUI();
+                    const box = document.getElementById('longtextContentBox');
+                    if(box) scrollToBottom(box);
+                });
+                if(!full) throw new Error('无内容');
                 saveState();
-                await performSendChat();
-                renderAll();
-                const box = document.getElementById('chatHistoryBox');
-                scrollToBottom(box);
-            }
-            async function performSendChat() { 
-                if(state.chatSelectedCharacterIndices.length===0) return;
-                const recent = state.chatHistory.slice(-state.chatContextCount * 2);
-                const messagesTemplate = [{ role: 'system', content: buildChatSystemPrompt() }];
-                recent.forEach(m => messagesTemplate.push({ role: m.role === 'user' ? 'user' : 'assistant', content: m.text }));
-                const promises = state.chatSelectedCharacterIndices.map(async (charIndex) => { const char = state.chatCharacters[charIndex]; if (!char) return null; const messages = messagesTemplate.map(m => { if(m.role === 'system') return { ...m, content: `你正在扮演${char.name}。${char.description}\n${m.content}` }; return m; }); try { const response = await callAPI(messages, { stream: false }); const isAnthropic = state.currentModel === 'claude-code'; let result = ''; if(isAnthropic) { const data = await response.json(); result = data.content?.[0]?.text || ''; } else { const data = await response.json(); result = data.choices?.[0]?.message?.content || ''; } return { speaker: char.name, text: result, role: 'assistant' }; } catch(e) { return { speaker: char.name, text: `❌ ${e.message}`, role: 'assistant' }; } });
-                const results = await Promise.all(promises);
-                results.forEach(r => { if(r) state.chatHistory.push(r); });
+            } catch(e) {
+                state.longtextResult = `❌ 生成失败: ${e.message}`;
+                updateLongtextUI();
+                alert(e.message);
+            } finally { if(btn) btn.disabled = false; saveState(); updatePreview(); }
+        }
+        function updateLongtextUI() {
+            const div = document.getElementById('longtextDisplay');
+            if(div) div.innerHTML = state.longtextResult ? formatText(state.longtextResult) : '<span style="color:var(--text-muted)">等待生成...</span>';
+            const info = document.getElementById('longtextTokenInfo');
+            if(info) info.innerText = `字数:${state.longtextResult.length} Token:${estimateTokens(state.longtextResult)}`;
+        }
+
+        // ---------- 小说模式核心 ----------
+        async function generateSingleChapter(idx, force = true) {
+            if(!state.apiKey) { alert('请填写API Key'); return false; }
+            const ch = state.novelChapters[idx];
+            if(!ch) return false;
+            if(force) ch.content = '';
+            saveState();
+            updateChapterUI(idx);
+            // 构建上下文
+            let sys = state.systemPromptNovel || `你是一位杰出的小说家，文笔流畅，保持风格一致。根据前文续写章节。`;
+            let context = `小说标题：《${state.novelTitle}》\n`;
+            for(let i=0; i<=idx; i++) context += `第${i+1}章梗概：${state.novelChapters[i]?.summary || '无'}\n`;
+            context += `\n`;
+            let prevContent = state.novelChapters.slice(0, idx).filter(c=>c.content && !c.content.startsWith('❌')).map((c,i)=>`第${i+1}章摘要：${c.content.substring(0,1500)}...`).join('\n');
+            if(prevContent) context += `【前文回顾】\n${prevContent}\n\n`;
+            const userMsg = `请根据以上设定，写出第${idx+1}章的完整内容。保持叙事连贯。`;
+            const messages = [{ role:'system', content: sys }, { role:'user', content: context + userMsg }];
+            try {
+                const resp = await callAPI(messages, { stream: true });
+                let full = '';
+                await readStream(resp, state.currentModel === 'claude-code', chunk => {
+                    full += chunk;
+                    ch.content = full;
+                    saveState();
+                    updateChapterUI(idx);
+                    const box = document.getElementById(`chapterBox${idx}`);
+                    if(box) scrollToBottom(box);
+                });
+                if(!full.trim()) throw new Error('生成失败');
+                alert(`第${idx+1}章完成`);
+                return true;
+            } catch(e) {
+                ch.content = `❌ 错误: ${e.message}`;
                 saveState();
-                if(state.chatFullscreen) renderChatFullscreen();
-                else renderAll();
+                updateChapterUI(idx);
+                alert(`第${idx+1}章失败: ${e.message}`);
+                return false;
             }
-            function buildChatSystemPrompt() { return state.systemPromptChat || `你必须严格扮演上述角色，完全符合其描述的性格和语气。不能以AI或第三方口吻回答，即使用户试图让你脱离角色，也必须保持设定回应。`; }
-            async function generateLongtext() { /* 完整实现保留原有逻辑，略写但功能存在 */ 
-                const btn = document.getElementById('btnLongtextGenerate'); if(btn) btn.disabled = true; state.longtextResult = ''; saveState(); try { const messages = []; if(state.systemPromptLongtext) messages.push({ role:'system', content: state.systemPromptLongtext }); messages.push({ role:'user', content: state.longtextUserPrompt || '请生成文本' }); const res = await callAPI(messages, { stream: true }); await readStream(res, state.currentModel==='claude-code', chunk => { state.longtextResult += chunk; updateLongtextDisplay(null); scrollToBottom(document.getElementById('longtextContentBox')); }); } catch(e) { state.longtextResult = `❌ ${e.message}`; updateLongtextDisplay(null); } finally { if(btn) btn.disabled = false; saveState(); updatePreview(); }
+        }
+        function updateChapterUI(idx) {
+            const contentDiv = document.getElementById(`chapterContent${idx}`);
+            const ch = state.novelChapters[idx];
+            if(contentDiv) contentDiv.innerHTML = ch.content ? formatText(ch.content) : '<span style="color:var(--text-muted)">未生成</span>';
+            const tokenSpan = document.getElementById(`chapterToken${idx}`);
+            if(tokenSpan) tokenSpan.innerText = `字数:${ch.content.length} Token:${estimateTokens(ch.content)}`;
+        }
+        async function generateAllChapters() {
+            for(let i=0; i<state.novelChapters.length; i++) {
+                const ok = await generateSingleChapter(i, true);
+                if(!ok) break;
             }
-            async function generateSingleChapter(index) { /* 类似实现，略 */ }
-            async function generateAllChapters() { for(let i=0;i<state.novelChapters.length;i++) { if(state.novelChapters[i].content && !state.novelChapters[i].content.startsWith('❌')) continue; await generateSingleChapter(i); if(state.novelChapters[i].content.startsWith('❌')) { alert(`第${i+1}章失败，中断`); break; } } }
-            function updatePreview() { const preview = document.getElementById('previewContent'); if(preview) preview.innerHTML = state.currentMode==='longtext' ? (formatText(state.longtextResult)||'<p style="color:#999;">暂无</p>') : state.novelChapters.map((ch,i)=>`<h3>第${i+1}章</h3><p>${formatText(ch.content||'（未生成）')}</p>`).join('')||'<p style="color:#999;">暂无</p>'; }
-            function updateLongtextDisplay(status) { const div = document.getElementById('longtextContent'); const info = document.getElementById('longtextTokenInfo'); if(div) div.innerHTML = status ? status : formatText(state.longtextResult); if(info) info.textContent = `字数:${state.longtextResult.length} Token:${estimateTokens(state.longtextResult)}`; }
-            function buildNovelPrompt(index) { const sys = state.systemPromptNovel || `你是一位小说作家，创作《${state.novelTitle||'未命名'}》。严格遵循前文风格，确保人物情节连贯。`; let context = state.novelChapters.slice(0,index+1).map((ch,i)=>`第${i+1}章梗概：${ch.summary||'无'}`).join('\n'); context = `【故事梗概】\n${context}\n\n`; const prev = state.novelChapters.slice(0,index).filter(ch=>ch.content&&!ch.content.startsWith('❌')).map((ch,i)=>`第${i+1}章摘要：${ch.content.substring(0,2000)}...`).join('\n'); if(prev) context += `【前情回顾】\n${prev}\n\n`; return [{ role:'system', content: sys }, { role:'user', content: `${context}请写出第${index+1}章完整内容，保持风格统一。` }]; }
-            function handleFileImport(e) { const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); if(file.name.endsWith('.txt')) { reader.onload = ev => processImportContent(file.name, ev.target.result); reader.readAsText(file, 'UTF-8'); } else if(file.name.endsWith('.docx')) { loadMammoth(() => { reader.onload = ev => { mammoth.extractRawText({ arrayBuffer: ev.target.result }).then(r => processImportContent(file.name, r.value)).catch(err => alert('解析失败：'+err.message)); }; reader.readAsArrayBuffer(file); }); } else alert('仅支持 .txt/.docx'); e.target.value = ''; }
-            function loadMammoth(cb) { if(window.mammoth) cb(); else { const s = document.createElement('script'); s.src = 'https://unpkg.com/mammoth/mammoth.browser.min.js'; s.onload = cb; s.onerror = () => alert('加载文档解析库失败'); document.head.appendChild(s); } }
-            function processImportContent(name, content) { if(content.length > 500000) return alert('单个文档不能超过50万字'); const total = state.importedDocs.reduce((s,d)=>s+d.content.length,0) + content.length; if(total > 1000000) return alert('语料库总字数不能超过100万字'); state.importedDocs.push({ name, content, time: new Date().toISOString() }); saveState(); renderAll(); }
-            function openCharacterEditor(index) { const isNew = index<0; const c = isNew ? { name:'', description:'' } : state.chatCharacters[index]; const html = `<div class="modal-overlay" id="charEditorOverlay"><div class="modal"><h3>${isNew?'新增':'编辑'}角色</h3><div class="form-group"><label class="form-label">名称</label><input class="form-input" id="charName" value="${escapeHtml(c.name)}"></div><div class="form-group"><label class="form-label">综合设定（身份、性格、用语习惯等）</label><textarea class="form-textarea" id="charDescription" rows="4">${escapeHtml(c.description||'')}</textarea></div><div style="text-align:right;"><button class="btn btn-secondary" id="btnCharCancel">取消</button> <button class="btn btn-primary" id="btnCharSave">保存</button></div></div></div>`; document.getElementById('modalContainer').innerHTML = html; document.getElementById('btnCharCancel').onclick = () => document.getElementById('modalContainer').innerHTML = ''; document.getElementById('btnCharSave').onclick = () => { const n = { name: document.getElementById('charName').value.trim(), description: document.getElementById('charDescription').value.trim() }; if(!n.name) return alert('名称必填'); if(isNew) { if(state.chatCharacters.length>=5) return alert('最多5个角色'); state.chatCharacters.push(n); } else state.chatCharacters[index] = n; document.getElementById('modalContainer').innerHTML = ''; saveState(); renderAll(); }; }
-            async function callAPI(messages, { stream = true } = {}) { if(!state.apiKey) throw new Error('请先输入API Key'); messages = messages.map(m => m.role==='system' ? { ...m, content: attachDocumentsToSystem(m.content) } : m); const isAnthropic = state.currentModel === 'claude-code'; const url = isAnthropic ? 'https://api.deepseek.com/anthropic/v1/messages' : 'https://api.deepseek.com/v1/chat/completions'; const headers = isAnthropic ? { 'Content-Type':'application/json', 'x-api-key':state.apiKey } : { 'Content-Type':'application/json', 'Authorization':`Bearer ${state.apiKey}` }; let body; if(isAnthropic) { const sys = messages.find(m=>m.role==='system'); const userMsgs = messages.filter(m=>m.role!=='system').map(m=>({ role:m.role, content:[{type:'text', text:m.content}] })); body = { model:'deepseek-v4-pro', max_tokens:state.maxTokens, stream, messages:userMsgs }; if(sys) body.system = sys.content; } else { const modelId = state.currentModel==='deepseek-v4-flash' ? 'deepseek-v4-flash' : 'deepseek-v4-pro'; body = { model:modelId, messages, max_tokens:state.maxTokens, stream, temperature:0.8 }; } const res = await fetch(url, { method:'POST', headers, body:JSON.stringify(body) }); if(!res.ok) throw new Error(`API错误 ${res.status}: ${await res.text()}`); return res; }
-            async function readStream(response, isAnthropic, onChunk) { const reader = response.body.getReader(); const decoder = new TextDecoder(); let buffer = ''; while(true) { const { done, value } = await reader.read(); if(done) break; buffer += decoder.decode(value, { stream: true }); const lines = buffer.split('\n'); buffer = lines.pop() || ''; for(const line of lines) { const trimmed = line.trim(); if(!trimmed || trimmed==='data: [DONE]') continue; if(trimmed.startsWith('data: ')) { try { const json = JSON.parse(trimmed.slice(6)); let text = ''; if(isAnthropic) { if(json.type==='content_block_delta' && json.delta?.text) text = json.delta.text; } else { if(json.choices?.[0]?.delta?.content) text = json.choices[0].delta.content; } if(text) onChunk(text); } catch(e){} } } } }
-            function attachDocumentsToSystem(sysPrompt) { if(!state.importedDocs.length) return sysPrompt; const docsText = state.importedDocs.map(d => d.content).join('\n\n'); return `${sysPrompt}\n\n【完全参照我给出的文档】\n以下为导入文档内容，请严格模仿风格：\n\`\`\`\n${docsText}\n\`\`\``; }
-            window.openSaveProfileModal = function() { const profiles = loadProfiles(); const html = `<div class="modal-overlay" id="profileSaveOverlay"><div class="modal"><h3>💾 保存方案</h3><div class="form-group"><input class="form-input" id="profileName" placeholder="方案名称"></div>${profiles.length>=10?`<p style="color:var(--warning);">已有10个，选择覆盖：<select class="form-select" id="profileOverwrite">${profiles.map((p,i)=>`<option value="${i}">${escapeHtml(p.name)}</option>`).join('')}</select></p>`:`<p>${profiles.length}/10</p>`}<div style="text-align:right;"><button class="btn btn-secondary" id="btnProfileCancel">取消</button> <button class="btn btn-primary" id="btnProfileSave">保存</button></div></div></div>`; document.getElementById('modalContainer').innerHTML = html; document.getElementById('btnProfileCancel').onclick = () => document.getElementById('modalContainer').innerHTML = ''; document.getElementById('btnProfileSave').onclick = () => { const name = document.getElementById('profileName').value.trim(); if(!name) return alert('请输入名称'); const profile = { name, apiKey:state.apiKey, currentModel:state.currentModel, currentMode:state.currentMode, systemPromptLongtext:state.systemPromptLongtext, systemPromptNovel:state.systemPromptNovel, systemPromptChat:state.systemPromptChat, savedAt:new Date().toISOString() }; const pro = loadProfiles(); if(pro.length>=10) pro[parseInt(document.getElementById('profileOverwrite').value)] = profile; else pro.push(profile); saveProfiles(pro); document.getElementById('modalContainer').innerHTML = ''; alert('已保存'); }; };
-            window.openLoadProfileModal = function() { const profiles = loadProfiles(); if(!profiles.length) return alert('无方案'); const list = profiles.map((p,i) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-color);"><div><strong>${escapeHtml(p.name)}</strong><div style="font-size:0.65rem;">${p.currentModel||'v4'} | ${new Date(p.savedAt).toLocaleString()}</div></div><div><button class="btn btn-sm btn-primary load-profile" data-index="${i}">加载</button><button class="btn btn-sm btn-secondary rename-profile" data-index="${i}">重命名</button><button class="btn btn-sm btn-danger delete-profile" data-index="${i}">删除</button></div></div>`).join(''); const html = `<div class="modal-overlay" id="profileLoadOverlay"><div class="modal"><h3>📂 方案管理</h3>${list}<button class="btn btn-secondary" id="btnLoadClose" style="margin-top:10px;">关闭</button></div></div>`; document.getElementById('modalContainer').innerHTML = html; document.getElementById('btnLoadClose').onclick = () => document.getElementById('modalContainer').innerHTML = ''; document.querySelectorAll('.load-profile').forEach(b=>b.onclick=()=>{ const p = profiles[parseInt(b.dataset.index)]; state.apiKey=p.apiKey||''; state.currentModel=p.currentModel||'deepseek-v4-pro'; state.currentMode=p.currentMode||'longtext'; state.systemPromptLongtext=p.systemPromptLongtext||''; state.systemPromptNovel=p.systemPromptNovel||''; state.systemPromptChat=p.systemPromptChat||''; document.getElementById('modalContainer').innerHTML=''; saveState(); renderAll(); }); document.querySelectorAll('.rename-profile').forEach(b=>b.onclick=()=>{ const idx=parseInt(b.dataset.index); const newName=prompt('新名称', profiles[idx].name); if(newName&&newName.trim()){ profiles[idx].name=newName.trim(); saveProfiles(profiles); document.getElementById('modalContainer').innerHTML=''; openLoadProfileModal(); } }); document.querySelectorAll('.delete-profile').forEach(b=>b.onclick=()=>{ const idx=parseInt(b.dataset.index); profiles.splice(idx,1); saveProfiles(profiles); document.getElementById('modalContainer').innerHTML=''; openLoadProfileModal(); }); };
-            loadState(); renderAll(); window.addEventListener('beforeunload', saveState); setInterval(saveState, 5000);
-        })();
-    </script>
+            alert('批量生成结束');
+        }
+        function addChapter() { state.novelChapters.push({ summary:'新章节', content:'' }); saveState(); render(); }
+        function deleteChapter(idx) { state.novelChapters.splice(idx,1); saveState(); render(); }
+        function clearChapter(idx) { state.novelChapters[idx].content = ''; saveState(); render(); }
+        function copyChapter(idx) { copyText(state.novelChapters[idx].content); }
+        function clearAllChapters() { state.novelChapters.forEach(ch=>ch.content=''); saveState(); render(); }
+        function concatAndCopy() {
+            let full = `《${state.novelTitle}》\n\n` + state.novelChapters.map((ch,i)=>`第${i+1}章\n${ch.content}`).join('\n\n');
+            copyText(full);
+        }
+
+        // ---------- 对话模式 ----------
+        async function sendChatMessage(text, isFullscreen=false) {
+            if(state.chatSelectedIndices.length === 0) return alert('请至少选择一个角色');
+            state.chatHistory.push({ speaker:'我', text, role:'user' });
+            saveState();
+            renderChatHistoryUI();
+            // 准备上下文
+            let recent = state.chatHistory.slice(-state.chatContextCount*2);
+            let baseSys = state.systemPromptChat || `你扮演角色，严格遵循角色设定，不打破人设。`;
+            let promises = state.chatSelectedIndices.map(async idx => {
+                let char = state.chatCharacters[idx];
+                if(!char) return null;
+                let messages = [{ role:'system', content: `你正在扮演${char.name}。${char.description || ''}\n${baseSys}` }];
+                recent.forEach(m => messages.push({ role: m.role === 'user' ? 'user' : 'assistant', content: m.text }));
+                try {
+                    let resp = await callAPI(messages, { stream: false });
+                    let data = await resp.json();
+                    let reply = (state.currentModel === 'claude-code') ? data.content?.[0]?.text : data.choices?.[0]?.message?.content;
+                    return { speaker: char.name, text: reply || '...', role:'assistant' };
+                } catch(e) { return { speaker: char.name, text: `❌ ${e.message}`, role:'assistant' }; }
+            });
+            let results = await Promise.all(promises);
+            results.forEach(r => { if(r) state.chatHistory.push(r); });
+            saveState();
+            renderChatHistoryUI();
+            if(isFullscreen) {
+                renderFullscreenChat();
+                const body = document.getElementById('fullscreenChatBody');
+                if(body) scrollToBottom(body);
+            } else {
+                const box = document.getElementById('chatHistoryArea');
+                if(box) scrollToBottom(box);
+            }
+        }
+        function renderChatHistoryUI() {
+            const container = document.getElementById('chatHistoryArea');
+            if(!container) return;
+            let html = state.chatHistory.map(m => `<div class="chat-msg"><span class="chat-speaker">${escapeHtml(m.speaker)}：</span>${formatText(m.text)}</div>`).join('');
+            container.innerHTML = html || '<span style="color:var(--text-muted)">暂无对话</span>';
+            const tokenSpan = document.getElementById('chatTokenInfo');
+            if(tokenSpan) tokenSpan.innerText = `字数:${state.chatHistory.reduce((s,m)=>s+m.text.length,0)} Token:${estimateTokens(state.chatHistory.map(m=>m.text).join(' '))}`;
+        }
+        function clearChatHistory() { state.chatHistory = []; saveState(); render(); }
+        function copyChatHistory() { copyText(state.chatHistory.map(m=>`${m.speaker}：${m.text}`).join('\n')); }
+
+        // 全屏聊天 + 键盘适配
+        function renderFullscreenChat() {
+            let selected = state.chatSelectedIndices.map(i=>state.chatCharacters[i]?.name).join(',')||'角色';
+            let messagesHtml = state.chatHistory.map(m => `<div style="text-align:${m.role==='user'?'right':'left'}; margin-bottom:12px;"><strong style="color:${m.role==='user'?'#8b949e':'#58a6ff'}">${escapeHtml(m.speaker)}</strong><div style="background:${m.role==='user'?'#21262d':'rgba(88,166,255,0.15)'}; display:inline-block; padding:8px 12px; border-radius:16px; max-width:80%; margin-top:4px;">${formatText(m.text)}</div></div>`).join('');
+            const container = document.getElementById('chatFullscreenContainer');
+            container.innerHTML = `<div class="chat-fullscreen">
+                <div class="chat-fullscreen-header"><button class="back-btn" id="closeFullscreenBtn">←</button><span>💬 ${escapeHtml(selected)}</span></div>
+                <div class="chat-fullscreen-body" id="fullscreenChatBody">${messagesHtml || '<div style="text-align:center;margin-top:40%;">开始聊天</div>'}</div>
+                <div class="chat-fullscreen-footer" id="fullscreenFooter"><input type="text" class="form-input" id="fullscreenInput" placeholder="输入消息..."><button class="send-btn" id="fullscreenSendBtn">发送</button></div>
+            </div>`;
+            document.getElementById('closeFullscreenBtn').onclick = () => { state.chatFullscreen = false; render(); };
+            const sendBtn = document.getElementById('fullscreenSendBtn');
+            const inputEl = document.getElementById('fullscreenInput');
+            const adjustFooter = () => {
+                const footer = document.getElementById('fullscreenFooter');
+                const vp = window.visualViewport;
+                if(footer && vp) {
+                    const keyboardH = window.innerHeight - vp.height;
+                    if(keyboardH > 100) footer.style.transform = `translateY(-${keyboardH}px)`;
+                    else footer.style.transform = '';
+                }
+            };
+            window.visualViewport?.addEventListener('resize', adjustFooter);
+            window.visualViewport?.addEventListener('scroll', adjustFooter);
+            sendBtn.onclick = async () => {
+                let txt = inputEl.value.trim();
+                if(!txt) return;
+                inputEl.value = '';
+                await sendChatMessage(txt, true);
+                renderFullscreenChat();
+                const newBody = document.getElementById('fullscreenChatBody');
+                if(newBody) scrollToBottom(newBody);
+                document.getElementById('fullscreenInput')?.focus();
+            };
+            inputEl.onkeydown = (e) => { if(e.key === 'Enter') sendBtn.click(); };
+            setTimeout(()=> { inputEl.focus(); scrollToBottom(document.getElementById('fullscreenChatBody')); }, 50);
+        }
+
+        // 角色管理
+        function openCharEditor(idx) {
+            let isNew = idx === -1;
+            let char = isNew ? { name:'', description:'' } : state.chatCharacters[idx];
+            let modal = document.createElement('div'); modal.className = 'modal-overlay';
+            modal.innerHTML = `<div class="modal"><h3>${isNew?'新建角色':'编辑角色'}</h3><div class="form-group"><input id="charName" class="form-input" placeholder="名称" value="${escapeHtml(char.name)}"></div><div class="form-group"><textarea id="charDesc" class="form-textarea" rows="3" placeholder="身份、性格、用语习惯等">${escapeHtml(char.description)}</textarea></div><div style="display:flex; gap:8px; justify-content:flex-end;"><button class="btn btn-secondary" id="cancelChar">取消</button><button class="btn btn-primary" id="saveChar">保存</button></div></div>`;
+            document.body.appendChild(modal);
+            document.getElementById('saveChar').onclick = () => {
+                let name = document.getElementById('charName').value.trim();
+                if(!name) return alert('请输入名称');
+                let desc = document.getElementById('charDesc').value;
+                if(isNew) {
+                    if(state.chatCharacters.length >= 5) return alert('最多5个角色');
+                    state.chatCharacters.push({ name, description: desc });
+                } else {
+                    state.chatCharacters[idx] = { name, description: desc };
+                }
+                saveState();
+                modal.remove();
+                render();
+            };
+            document.getElementById('cancelChar').onclick = () => modal.remove();
+        }
+
+        // ---------- 渲染主界面 ----------
+        function render() {
+            if(state.currentMode === 'chat' && state.chatFullscreen) {
+                document.getElementById('mainContainer').innerHTML = '';
+                document.getElementById('chatFullscreenContainer').style.display = 'block';
+                renderFullscreenChat();
+                return;
+            }
+            document.getElementById('chatFullscreenContainer').style.display = 'none';
+            const container = document.getElementById('mainContainer');
+            container.innerHTML = renderSettingsCard() + renderModeCard() + (state.currentMode !== 'chat' ? renderPreviewCard() : '');
+            attachGlobalEvents();
+            document.querySelectorAll('.mode-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.mode === state.currentMode));
+            applyCollapse();
+            if(state.currentMode === 'novel') attachNovelEvents();
+            if(state.currentMode === 'chat') attachChatEvents();
+            if(state.currentMode === 'longtext') attachLongtextEvents();
+            updatePreview();
+        }
+
+        function renderSettingsCard() {
+            let docsHtml = state.importedDocs.map((d,i)=>`<div class="doc-list-item"><span>📄 ${escapeHtml(d.name)} (${d.content.length}字)</span><button class="btn btn-sm btn-danger" onclick="window.removeDoc(${i})">✕</button></div>`).join('');
+            return `<div class="card" id="apiCard"><div class="card-header" id="apiHeader"><span class="card-title">⚙️ API设置 & 语料</span><span class="collapse-btn">▶</span></div><div class="card-body"><div class="form-group"><label class="form-label">DeepSeek API Key</label><input type="password" class="form-input" id="apiKeyInput" value="${escapeHtml(state.apiKey)}"></div><div class="form-group"><label class="form-label">模型</label><select id="modelSelect" class="form-select"><option ${state.currentModel==='deepseek-v4-pro'?'selected':''}>deepseek-v4-pro</option><option ${state.currentModel==='deepseek-v4-flash'?'selected':''}>deepseek-v4-flash</option><option ${state.currentModel==='claude-code'?'selected':''}>claude-code</option></select></div><div class="form-group"><label class="form-label">最大Token</label><input type="number" id="maxTokensInput" class="form-input" value="${state.maxTokens}"></div><div class="form-group"><label class="form-label">系统提示 (${state.currentMode==='longtext'?'长文本':state.currentMode==='novel'?'小说':'对话'})</label><textarea id="sysPrompt" class="form-textarea" rows="3">${escapeHtml(getCurSysPrompt())}</textarea></div><div class="form-group"><label class="form-label">📚 导入语料 (txt/docx)</label><input type="file" id="docUpload" accept=".txt,.docx" style="display:none"><button class="btn btn-secondary btn-sm" id="importDocBtn">选择文件</button><div id="docsList">${docsHtml}</div></div></div></div>`;
+        }
+        function renderModeCard() {
+            if(state.currentMode === 'longtext') {
+                return `<div class="card" id="modeCard"><div class="card-header" id="modeHeader"><span class="card-title">📝 长文本生成</span><span class="collapse-btn">▶</span></div><div class="card-body"><div class="form-group"><textarea id="longtextPrompt" class="form-textarea tall" placeholder="输入你的提示词...">${escapeHtml(state.longtextUserPrompt)}</textarea></div><button class="btn btn-primary" id="genLongBtn">🚀 生成</button><div class="content-toolbar-external"><span id="longtextTokenInfo"></span><div><button class="btn btn-sm btn-secondary" id="clearLongBtn">🗑</button><button class="btn btn-sm btn-secondary" id="copyLongBtn">📋</button></div></div><div class="content-box" id="longtextContentBox"><div id="longtextDisplay"></div></div></div></div>`;
+            } else if(state.currentMode === 'novel') {
+                let chapsHtml = state.novelChapters.map((ch,i)=>`<div class="chapter-item" id="chapterItem${i}"><div class="chapter-header"><span class="chapter-number">第${i+1}章</span><div class="chapter-actions"><button class="btn btn-sm btn-primary gen-chap" data-idx="${i}">⚡生成</button><button class="btn btn-sm btn-secondary copy-chap" data-idx="${i}">📋</button><button class="btn btn-sm btn-secondary clear-chap" data-idx="${i}">🗑</button><button class="btn btn-sm btn-secondary regen-chap" data-idx="${i}">🔄重试</button><button class="btn btn-sm btn-danger del-chap" data-idx="${i}">✕</button></div></div><div class="form-group"><textarea class="form-textarea chap-summary" data-idx="${i}" rows="2" placeholder="章节梗概">${escapeHtml(ch.summary)}</textarea></div><div class="content-toolbar-external"><span id="chapterToken${i}" class="token-info">字数:${ch.content.length} Token:${estimateTokens(ch.content)}</span></div><div class="content-box" id="chapterBox${i}"><div id="chapterContent${i}">${ch.content ? formatText(ch.content) : '<span style="color:var(--text-muted)">未生成</span>'}</div></div></div>`).join('');
+                return `<div class="card" id="modeCard"><div class="card-header" id="modeHeader"><span class="card-title">📖 小说创作</span><span class="collapse-btn">▶</span></div><div class="card-body"><div class="form-group"><label class="form-label">小说标题</label><input id="novelTitleInput" class="form-input" value="${escapeHtml(state.novelTitle)}"></div>${chapsHtml}<div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;"><button class="btn btn-primary btn-sm" id="addChapBtn">➕ 新增章节</button><button class="btn btn-success btn-sm" id="concatAllBtn">📋 拼接复制</button><button class="btn btn-secondary btn-sm" id="genAllBtn">⚡ 全部生成</button><button class="btn btn-danger btn-sm" id="clearAllBtn">🗑 清除所有内容</button></div></div></div>`;
+            } else {
+                let rolesHtml = state.chatCharacters.map((c,i)=>`<div class="character-card ${state.chatSelectedIndices.includes(i)?'selected':''}" data-charidx="${i}"><input type="checkbox" class="character-checkbox" data-charidx="${i}" ${state.chatSelectedIndices.includes(i)?'checked':''}><span class="character-name">${escapeHtml(c.name)}</span><button class="btn btn-sm btn-secondary edit-char" data-charidx="${i}">✎</button><button class="btn btn-sm btn-danger del-char" data-charidx="${i}">✕</button></div>`).join('');
+                return `<div class="card" id="modeCard"><div class="card-header" id="modeHeader"><span class="card-title">💬 对话模式</span><span class="collapse-btn">▶</span></div><div class="card-body"><div class="form-group"><label class="form-label">角色列表 (最多5个)</label><div id="rolesContainer">${rolesHtml}</div><button class="btn btn-primary btn-sm" id="newCharBtn">➕ 新增角色</button><button class="btn btn-secondary btn-sm" id="fullscreenChatBtn">📱 全屏聊天</button></div><div class="form-group"><label class="form-label">上下文轮数</label><input type="number" id="ctxCount" class="form-input" style="width:100px;" value="${state.chatContextCount}" min="1" max="20"></div><div class="content-toolbar-external"><span id="chatTokenInfo"></span><div><button class="btn btn-sm btn-secondary" id="clearChatBtn">🗑 清空对话</button><button class="btn btn-sm btn-secondary" id="copyChatBtn">📋 复制对话</button></div></div><div class="chat-area" id="chatHistoryArea"></div><div class="chat-input-row"><input type="text" id="chatInput" class="form-input" placeholder="输入消息..."><button class="btn btn-primary btn-sm" id="sendChatBtn">发送</button></div></div></div>`;
+            }
+        }
+        function renderPreviewCard() {
+            let content = state.currentMode === 'longtext' ? (state.longtextResult ? formatText(state.longtextResult) : '暂无') : state.novelChapters.map((ch,i)=>`<h3>第${i+1}章</h3><div>${formatText(ch.content||'（未生成）')}</div>`).join('');
+            return `<div class="card" id="previewCard"><div class="card-header" id="previewHeader"><span class="card-title">📄 预览区</span><span class="collapse-btn">▶</span></div><div class="card-body"><div class="preview-section"><div class="preview-label">${state.currentMode==='novel'?state.novelTitle:'长文本'}</div><div id="previewContent">${content}</div></div></div></div>`;
+        }
+
+        function attachGlobalEvents() {
+            document.getElementById('apiKeyInput')?.addEventListener('input', e=>{ state.apiKey=e.target.value; saveState(); });
+            document.getElementById('modelSelect')?.addEventListener('change', e=>{ state.currentModel=e.target.value; saveState(); });
+            document.getElementById('maxTokensInput')?.addEventListener('change', e=>{ state.maxTokens=Math.min(256000,Math.max(1000,parseInt(e.target.value)||256000)); saveState(); });
+            document.getElementById('sysPrompt')?.addEventListener('input', e=>{ setCurSysPrompt(e.target.value); saveState(); });
+            document.getElementById('importDocBtn')?.addEventListener('click',()=>document.getElementById('docUpload').click());
+            document.getElementById('docUpload')?.addEventListener('change',async e=>{
+                let file = e.target.files[0]; if(!file) return;
+                let reader = new FileReader();
+                reader.onload = ev => {
+                    let content = ev.target.result;
+                    if(content.length>500000) return alert('文档超过50万字');
+                    state.importedDocs.push({ name: file.name, content });
+                    saveState(); render();
+                };
+                if(file.name.endsWith('.txt')) reader.readAsText(file,'utf-8');
+                else alert('暂仅支持txt，docx需额外库，简化版支持txt');
+                e.target.value='';
+            });
+            document.querySelectorAll('.mode-tab').forEach(btn => btn.onclick = () => {
+                if(btn.dataset.mode === state.currentMode) return;
+                state.currentMode = btn.dataset.mode;
+                state.chatFullscreen = false;
+                saveState(); render();
+            });
+            document.getElementById('apiHeader')?.addEventListener('click',()=>{ state.collapsedCards.api=!state.collapsedCards.api; saveState(); applyCollapse(); });
+            document.getElementById('modeHeader')?.addEventListener('click',()=>{ state.collapsedCards.mode=!state.collapsedCards.mode; saveState(); applyCollapse(); });
+            document.getElementById('previewHeader')?.addEventListener('click',()=>{ state.collapsedCards.preview=!state.collapsedCards.preview; saveState(); applyCollapse(); });
+        }
+        function attachLongtextEvents() {
+            document.getElementById('longtextPrompt')?.addEventListener('input', e=>{ state.longtextUserPrompt=e.target.value; saveState(); });
+            document.getElementById('genLongBtn')?.addEventListener('click', generateLongtext);
+            document.getElementById('clearLongBtn')?.addEventListener('click',()=>{ state.longtextResult=''; saveState(); render(); });
+            document.getElementById('copyLongBtn')?.addEventListener('click',()=>copyText(state.longtextResult));
+        }
+        function attachNovelEvents() {
+            document.getElementById('novelTitleInput')?.addEventListener('input', e=>{ state.novelTitle=e.target.value; saveState(); render(); });
+            document.getElementById('addChapBtn')?.addEventListener('click', addChapter);
+            document.getElementById('genAllBtn')?.addEventListener('click', generateAllChapters);
+            document.getElementById('concatAllBtn')?.addEventListener('click', concatAndCopy);
+            document.getElementById('clearAllBtn')?.addEventListener('click', clearAllChapters);
+            document.querySelectorAll('.gen-chap').forEach(btn=>btn.onclick=()=>generateSingleChapter(parseInt(btn.dataset.idx),true));
+            document.querySelectorAll('.copy-chap').forEach(btn=>btn.onclick=()=>copyChapter(parseInt(btn.dataset.idx)));
+            document.querySelectorAll('.clear-chap').forEach(btn=>btn.onclick=()=>clearChapter(parseInt(btn.dataset.idx)));
+            document.querySelectorAll('.regen-chap').forEach(btn=>btn.onclick=()=>generateSingleChapter(parseInt(btn.dataset.idx),true));
+            document.querySelectorAll('.del-chap').forEach(btn=>btn.onclick=()=>deleteChapter(parseInt(btn.dataset.idx)));
+            document.querySelectorAll('.chap-summary').forEach(ta=>ta.addEventListener('input',e=>{
+                let idx = parseInt(e.target.dataset.idx);
+                if(!isNaN(idx)) state.novelChapters[idx].summary = e.target.value; saveState();
+            }));
+        }
+        function attachChatEvents() {
+            renderChatHistoryUI();
+            document.getElementById('ctxCount')?.addEventListener('change', e=>{ state.chatContextCount=parseInt(e.target.value)||6; saveState(); });
+            document.getElementById('newCharBtn')?.addEventListener('click',()=>openCharEditor(-1));
+            document.getElementById('fullscreenChatBtn')?.addEventListener('click',()=>{ if(state.chatSelectedIndices.length) { state.chatFullscreen=true; render(); } else alert('请至少选择一个角色'); });
+            document.getElementById('clearChatBtn')?.addEventListener('click', clearChatHistory);
+            document.getElementById('copyChatBtn')?.addEventListener('click', copyChatHistory);
+            document.getElementById('sendChatBtn')?.addEventListener('click', async()=>{
+                let input = document.getElementById('chatInput');
+                let txt = input.value.trim(); if(!txt) return;
+                input.value = '';
+                await sendChatMessage(txt, false);
+                render(); // 刷新界面
+            });
+            document.getElementById('chatInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('sendChatBtn')?.click(); });
+            // 角色勾选
+            document.querySelectorAll('.character-checkbox').forEach(cb=>cb.addEventListener('change', e=>{
+                let idx = parseInt(e.target.dataset.charidx);
+                if(e.target.checked) { if(!state.chatSelectedIndices.includes(idx)) state.chatSelectedIndices.push(idx); }
+                else state.chatSelectedIndices = state.chatSelectedIndices.filter(i=>i!==idx);
+                saveState(); render();
+            }));
+            document.querySelectorAll('.edit-char').forEach(btn=>btn.addEventListener('click', e=>{ e.stopPropagation(); openCharEditor(parseInt(btn.dataset.charidx)); }));
+            document.querySelectorAll('.del-char').forEach(btn=>btn.addEventListener('click', e=>{ e.stopPropagation(); let idx=parseInt(btn.dataset.charidx); state.chatCharacters.splice(idx,1); state.chatSelectedIndices = state.chatSelectedIndices.filter(i=>i!==idx).map(i=>i>idx?i-1:i); saveState(); render(); }));
+        }
+        function applyCollapse() {
+            document.getElementById('apiCard')?.classList.toggle('collapsed', state.collapsedCards.api);
+            document.getElementById('modeCard')?.classList.toggle('collapsed', state.collapsedCards.mode);
+            document.getElementById('previewCard')?.classList.toggle('collapsed', state.collapsedCards.preview);
+        }
+        function updatePreview() {
+            let previewDiv = document.getElementById('previewContent');
+            if(!previewDiv) return;
+            if(state.currentMode === 'longtext') previewDiv.innerHTML = state.longtextResult ? formatText(state.longtextResult) : '暂无';
+            else if(state.currentMode === 'novel') previewDiv.innerHTML = state.novelChapters.map((ch,i)=>`<h3>第${i+1}章</h3><div>${formatText(ch.content||'（未生成）')}</div>`).join('');
+        }
+
+        window.removeDoc = function(idx) { state.importedDocs.splice(idx,1); saveState(); render(); };
+        // 方案保存/加载
+        document.getElementById('saveProfileBtn')?.addEventListener('click',()=>{
+            let name = prompt('方案名称');
+            if(!name) return;
+            let profiles = JSON.parse(localStorage.getItem(PROFILES_KEY)||'[]');
+            let profile = { name, apiKey:state.apiKey, currentModel:state.currentModel, systemPromptLongtext:state.systemPromptLongtext, systemPromptNovel:state.systemPromptNovel, systemPromptChat:state.systemPromptChat, currentMode:state.currentMode };
+            profiles.push(profile);
+            if(profiles.length>10) profiles.shift();
+            localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+            alert('已保存');
+        });
+        document.getElementById('loadProfileBtn')?.addEventListener('click',()=>{
+            let profiles = JSON.parse(localStorage.getItem(PROFILES_KEY)||'[]');
+            if(!profiles.length) return alert('无方案');
+            let list = profiles.map((p,i)=>`<div style="margin-bottom:6px;"><strong>${escapeHtml(p.name)}</strong> <button class="btn btn-sm btn-primary" onclick="window.loadProfile(${i})">加载</button></div>`).join('');
+            let modalDiv = document.createElement('div'); modalDiv.className='modal-overlay';
+            modalDiv.innerHTML = `<div class="modal"><h3>选择方案</h3>${list}<button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="this.closest('.modal-overlay').remove()">关闭</button></div>`;
+            document.body.appendChild(modalDiv);
+        });
+        window.loadProfile = function(idx) {
+            let profiles = JSON.parse(localStorage.getItem(PROFILES_KEY)||'[]');
+            let p = profiles[idx];
+            if(p) {
+                state.apiKey = p.apiKey || '';
+                state.currentModel = p.currentModel || 'deepseek-v4-pro';
+                state.systemPromptLongtext = p.systemPromptLongtext || '';
+                state.systemPromptNovel = p.systemPromptNovel || '';
+                state.systemPromptChat = p.systemPromptChat || '';
+                state.currentMode = p.currentMode || 'longtext';
+                saveState(); render();
+                document.querySelector('.modal-overlay')?.remove();
+                alert('已加载');
+            }
+        };
+
+        loadStoredState();
+        render();
+        setInterval(saveState, 5000);
+    })();
+</script>
 </body>
 </html>
